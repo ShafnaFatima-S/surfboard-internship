@@ -73,7 +73,7 @@ function funct(n){
     console.log(sum += n) 
 }
 ```
-Example:
+Output:
 11
 33
 66
