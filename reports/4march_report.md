@@ -1,0 +1,16 @@
+# Internship Summary
+## Day-3 (04/03/25)
+### <ins> Key learnings of the day:</ins>
+Today is my third day in the internship and we began our class by solving few problem solving exercises.There are three classes of problems.
+- Have no solution
+- Have multiple solution
+- Trial and Error solution
+
+We also solved a question based on the Eulerian cycle. It starts with vertex and uses all the edges exactly once. When someone asks you a question that you already know you answer them by taking the question as input and then with the help of your memory you process the question and then come up with a solution.This is the same way computers also process the input and gives us the solution. We also had a discussion about interface. Interface is a way to communicate with commputers. Computers can understand only binary language. Computers use electronic circuits with 1 for on and 0 for off.
+
+### Array functions:
+I previously used var keyword so my mentor assisted me to use let or const keyword and why not var keyword. when we use var keyword inside a block scope it can still be accessed outside that function. This shouldn't be happening so we use let and const keyword, they are block scoped. When we try to call a var  variable before initializing it, it does not show error. It shows result as undefined. But when we try to use let or const variables it throws an error as we can't access a variable before initializing it.
+
+I have also gained knowledge about array.map() method. The array.map() method is used to create a new array of values by calling a function for every array element.It does not modify the original array but creates a new array with the result of the functions used. The array.forEach() method is used to execute a function on each element of an array. It does not create a new array with the results of the function. The array.filter() method is used to create a new array containing elements that satisfies a specific condition. If there is a list of array with values 10,22,7,8 and my condition is filter out the elements with numbers greater than or equal to 10 then with the help of the filter() method we can generate a new array with the values greater than or equal to 10. That means the array will have the values 10 and 22. The array.find() method is used to identify the first element that satisfies the condition. It does not create a new array but returns only the first element that matches the condition. I also tried using arrow function instead of normal function. In arrow function if there is only one expression then the parentheses and the return statement can be omitted. Class is a collection of data members and member functions. Class is a template for creating objects. We use the class keyword to create a class.
+
+In markdown I have gained knowledge to make tables. To align the table contents we use " :--,:--:,--: ". The " :-- " is used to align the table contents to the left side of the table. The " :--: " is used to align the table contents to the center of the table. The " --: " is used to align the table contents to the right side of the table. For inline images in markdown language use exclamatory mark along with the square bracket for alternate text and parentheses for image link. That is , "! [alt text] (link)". For GIF it can be given in the same way like that of the image.
