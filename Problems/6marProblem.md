@@ -41,7 +41,6 @@ const blueBucket=[]
 const pinkBucket=[]
 
 for(let i=0;i<randomBalls.length;i++){
-      console.log(randomBalls[i])
     if(randomBalls[i].colour==="blue"){
         blueBucket.push(randomBalls[i])
     }
@@ -55,26 +54,6 @@ for(let i=0;i<randomBalls.length;i++){
 ```
 Output:
 ```
-{ ballNumber: 1, colour: 'green' }
-{ ballNumber: 2, colour: 'blue' }
-{ ballNumber: 3, colour: 'green' }
-{ ballNumber: 4, colour: 'blue' }
-{ ballNumber: 5, colour: 'green' }
-{ ballNumber: 6, colour: 'blue' }
-{ ballNumber: 7, colour: 'green' }
-{ ballNumber: 8, colour: 'blue' }
-{ ballNumber: 9, colour: 'green' }
-{ ballNumber: 10, colour: 'blue' }
-{ ballNumber: 11, colour: 'green' }
-{ ballNumber: 12, colour: 'blue' }
-{ ballNumber: 13, colour: 'blue' }
-{ ballNumber: 14, colour: 'green' }
-{ ballNumber: 15, colour: 'blue' }
-{ ballNumber: 16, colour: 'green' }
-{ ballNumber: 17, colour: 'blue' }
-{ ballNumber: 18, colour: 'green' }
-{ ballNumber: 19, colour: 'blue' }
-{ ballNumber: 20, colour: 'green' }
 [
   { ballNumber: 2, colour: 'blue' },
   { ballNumber: 4, colour: 'blue' },
