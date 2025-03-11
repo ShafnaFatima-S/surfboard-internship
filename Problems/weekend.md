@@ -15,21 +15,25 @@
  
  ### Solution:
  ```
- let name="Abraham"
+let name="Abraham"
 for(let i=0;i<5;i++){
     let name="Abraham"
     console.log(name)
-    
+    name=name.padStart(16,"Surfboard")
+    console.log(name) 
 }
-name=name.padStart(16,"Surfboard")
-console.log(name) 
+
 ```
 Output:
 ```
 Abraham
+SurfboardAbraham
 Abraham
+SurfboardAbraham
 Abraham
+SurfboardAbraham
 Abraham
+SurfboardAbraham
 Abraham
 SurfboardAbraham
 ```
@@ -86,3 +90,61 @@ Output:
 ```
 6995296
 ```
+# Problem 4
+ 
+ 1: Start
+ 
+ 2: Set numberToCheck <- 1001001001001, 12345567891, 559922932941
+ 
+ 3: Remove the last digit
+ 
+ 5: From the last digit multiply each digit by 2
+ 
+ 6: Take each of the products derived and add them together
+ 
+ 7: Reduce the number until you get a single digit
+ 
+ 8: Check if the calculated value is equal to the last digit from Step 3
+ 
+ 9: Decide if the number is valid (If the value is equal, the number is valid. 
+Otherwise it is invalid)
+
+ 10: Print the validity
+ 
+ 11: Stop
+## Solution
+```
+function answer(value){
+const split_val=value.split("")
+const neww=split_val.pop()
+split_val.reverse()
+const c = split_val.map((v)=> parseInt(v)*2)
+       const val = reduce(c)
+       if(neww==val){
+           return "valid"
+       }
+       else{
+           return "Invalid"
+       }
+
+}
+function reduce(data){
+    const res= data.reduce((e,i)=>e+parseInt(i),0)
+    const result = JSON.stringify(res).split("")
+       if(result.length<=1) return res
+     return reduce(result)
+     
+}
+
+console.log(answer('1001001001001'))
+console.log(answer('12345567891'))
+console.log(answer('559922932941'))
+
+```
+Output:
+```
+Invalid
+valid
+valid
+```
+
