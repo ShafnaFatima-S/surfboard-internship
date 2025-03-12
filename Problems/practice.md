@@ -147,4 +147,34 @@ Invalid
 valid
 valid
 ```
+# Problem 5
+ Your computer has received a message in Morse Code. However instead of the .s 
+and _s, its replaced with ; and :. Everything else seems to be in the same 
+structure as standard Morse code. How will you program your computer to this 
+decrypt message. -> Eg: ;: :;;; ;:; ;: ;;;; ;: ::
+## Solution
+```
+function code(val){
+    
+    const a=".s,_s"
+    const new_val=val.split("")
+    const replace_val=new_val.map((n1)=>n1.toString().replace(';','.s').replace(':','_s'))
+    const val1=replace_val.join().replaceAll(',','')
+    return val1
+        
+}
+console.log(code(";: :;;; ;:; ;: ;;;; ;: ::"))
+```
+Output:
+```
+.s_s _s.s.s.s .s_s.s .s_s .s.s.s.s .s_s _s_s
+```
+# Problem 6
+Your computer needs to sort 5000 degree certificates from SRM University in 
+reverse alphabetical order. How will you teach your computer to do this?
+## Solution
+- Take all the degree certificates.
+- Arrange all the certificates in descending order.
+- Stack all the certificates in a way that each box has only 5000 certificates.
+- Continue until all the certificates are stacked.
 
