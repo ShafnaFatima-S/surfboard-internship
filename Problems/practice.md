@@ -178,3 +178,35 @@ reverse alphabetical order. How will you teach your computer to do this?
 - Stack all the certificates in a way that each box has only 5000 certificates.
 - Continue until all the certificates are stacked.
 
+# Problem 7
+How will you teach your computer to find the GCD(Greatest common Divisor of 2 
+non-prime numbers)?
+### Algorithm
+- Take two numbers.
+- Check if both the numbers are non prime.
+- If the numbers are non prime then find the modulus of the two numbers.
+- Find the modulus until the remainder is no more divisible.
+- The last divisor is the greatest common divisor.
+
+# Problem 8
+ In the great temple of Brahma in Benares, India, on 
+a brass plate under the dome that marks the center 
+of the world, there are 64 disks of pure gold that 
+the priests carry one at a time between three 
+diamond needles according to Brahma’s immutable 
+law: No disk may be placed on a smaller disk. In 
+the beginning of the world all 64 disks formed the 
+Tower of Brahma on one needle. Now, however, the 
+process of transfer of the tower from one needle to 
+another is in mid course. When the last disk is 
+finally in place, once again forming the Tower of 
+Brahma but on a different needle, then will come 
+the end of the world and all will turn to dust.
+### Algorithm
+- Start.
+- Take the smallest disk and place it in the second needle.
+- Take the next disk place it in the third needle and then take the disk from the second needle and place it in the third needle.
+- Take the next disk and place it in the second needle and then from the third needle take and replace the smallest disk in the first needle. Then take the disk from the third needle and replace it in the second needle.
+- Take the smallest disk kept on the first needle and replace it in the second needle.
+- Continue the same way until all the needles are arranged in the order on the third needle.
+- Stop.
