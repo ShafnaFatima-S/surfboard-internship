@@ -1,6 +1,6 @@
 # Conditional Statements
 
-Conditional statements allows you to execute a particular block of code based on the conditions. The block of code executes only when the condition is satisfied. If the condition is not satisfied then the statements inside the block will  be executed based on any other conditons provided. Conditional statements are:
+Conditional statements allows you to execute a particular block of code based on the conditions. The block of code executes only when the condition is satisfied. If the condition is not satisfied then the statements inside the block will  be executed based on any other conditions provided. Conditional statements are:
 - if statement
 - if..else statement
 - else if statement
