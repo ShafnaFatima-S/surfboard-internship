@@ -1,0 +1,11 @@
+# Internship Summary
+
+## Day-19 (31/03/25)
+
+### <ins> Key learnings of the day:</ins>
+
+Today I learned how to make api calls. An api call is the request made by the client to access the data or interact with the data. Api is a set of rules that shows how a data should interact. There are few types of api calls. Some of them are get, post, put, delete. The get method is used to retrieve data from the server. The post method is used send data to the server for creating. The put method is used to update an existing data in the server. The delete method is used to delete the data from the server.
+
+We also had a session where we discussed about the scope of a variable. Scope can be said as the block where we can access the variable. Some variables can be accessed throughout the program and some variables are restricted to use throughout the program. Consider a program with a main function, some variables are given inside it. Inside the main function there is another function which is trying to access the variables inside the main function. Now this will not show any error. Now if there is a variable inside the sub function and we are trying to access it outside the output will be undefined. This is known as the scope of a variable. Every programming languages have execution stack. The execution stack helps the programming languages to get the proper execution of functions. The execution stack helps to check the scope of a variable as well.
+
+I have two nest projects, one for note app and another for the authentication. I should run both the projects at the same time but both the projects should use different ports. For that I kept one projects port number as 3000 and other projects port number as 8080. I used axios for making the api call. Axios is a javascript library for making http requests from web browsers or nest projects. Axios is a promise based http client that helps to make api calls to other resources. Inside the get method I gave the link for checking the login and then in headers I gave the authorization token. The authorization token from the header will check whether the token is valid or not. If the token is valid then the response will be true. If the token is invalid it throws error that the token is invalid.
