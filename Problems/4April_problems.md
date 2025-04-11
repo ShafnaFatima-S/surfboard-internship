@@ -718,7 +718,7 @@ void main() {
  }
 
  outer(y);
- print('Main end: x  $x, y  $y');
+ print('Main end: x = $x, y = $y');
  }
 ```
 
@@ -728,7 +728,7 @@ void main() {
 Outer start: x = 20, y = 20
 Inner: x = 30,y = 40
 Outer end: x = 20, y = 20
-Main end: x  10, y  20
+Main end: x = 10, y = 20
 
 ```
 
