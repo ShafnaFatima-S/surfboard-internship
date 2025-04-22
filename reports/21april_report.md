@@ -1,0 +1,10 @@
+# Internship Summary
+## Day-31 (21/04/25)
+### <ins> Key learnings of the day:</ins>
+Today we did not have any other session. I was working with my note app. All the data and api calls in my insomnia app was deleted so I was working with it to keep all the api calls as before. I created auth app and note app endpoints with create notes, get all notes, get notes by id, update notes, delete notes, last 30 days deleted notes, pinned notes, archived notes, locked notes.
+
+I also had issues in connecting to the database. It threw error when i tried running the code. Then I googled the error and found a solution for that. After correcting I was able to make database connections. As I cloned the app from git using git clone I had to set environment variables again. so I created a .env file in the root file and then declared all the details like the database connection details like the host, database, type, port number and also the secret key and expiration date for the jwt token.
+
+For the host I gave it as localhost, for database I gave it as postgres, for port I gave the port number as 5432, for username I gave it as postgres and I also gave the password for it. After setting up the environment variable I was able to access them. I also had to install some packages as it showed error while trying to run that. Then I lost few changes that I made in the note app so I was trying to do that again. 
+
+I displayed all the created notes from the noteapp by the particular user by using the user id generated during the user creation. Now I am working on with the creation of notes and saving it in the database. Then I also had to give options like pin, archive, lock and trash options in the note creation page. I am going to try that soon but before that I have to get the note by id and displays the whole note when the user touches it.
