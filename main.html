@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --card-bg: #f4f4f4;
+      --accent-color: #3b82f6;
+      --btn-hover: #2563eb;
+      --select-bg: #ffffff;
+      --select-text: #000000;
+    }
+
+    body.dark {
+      --bg-color: #2d2d2d;
+      --text-color: #ffffff;
+      --card-bg: #3a3a3a;
+      --accent-color: #1e40af;
+      --btn-hover: #2563eb;
+      --select-bg: #444;
+      --select-text: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      padding: 1rem 2rem;
+      background-color: var(--accent-color);
+      color: white;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background-color: var(--card-bg);
+      border-bottom: 1px solid #ccc;
+    }
+
+    .left-controls,
+    .right-controls {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .controls select,
+    .controls button {
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: background 0.3s, transform 0.2s;
+      min-width: 150px;
+    }
+
+    .controls select {
+      background: var(--select-bg);
+      color: var(--select-text);
+      border: 1px solid #ccc;
+    }
+
+    .controls button {
+      background: var(--accent-color);
+      color: white;
+      border: none;
+    }
+
+    .controls button:hover {
+      background-color: var(--btn-hover);
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+
+    .container {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      min-height: 500px; 
+    }
+
+    canvas {
+      width: 100% !important;
+      max-width: 600px;
+      height: 400px !important;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 1rem;
+      margin: 0 auto;
+      transition: background-color 0.3s;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        font-size: 1.2rem;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .left-controls,
+      .right-controls {
+        justify-content: flex-start;
+        width: 100%;
+      }
+
+      .controls select,
+      .controls button {
+        min-width: auto;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        font-size: 1rem;
+        padding: 1rem;
+      }
+
+      .controls {
+        padding: 1rem;
+      }
+
+      .controls select,
+      .controls button {
+        font-size: 0.9rem;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      canvas {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>📊 Data Dashboard</header>
+
+  <div class="controls">
+    <div class="left-controls">
+      <select id="chartType">
+        <option value="bar">Bar</option>
+        <option value="line">Line</option>
+        <option value="pie">Pie</option>
+        <option value="scatter">Scatter</option>
+      </select>
+      <select id="dataFilter">
+        <option value="all">All</option>
+        <option value="T-Shirts">T-Shirts</option>
+        <option value="Jeans">Jeans</option>
+        <option value="Jackets">Jackets</option>
+      </select>
+    </div>
+
+    <div class="right-controls">
+      <button onclick="toggleTheme()">Toggle Theme</button>
+      <button onclick="exportData()">Export Data</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <canvas id="dashboardChart"></canvas>
+  </div>
+
+  <script>
+    let chart;
+    let theme = "light";
+
+    // Reduced data to only include January to July
+    const clothingData = [
+      { month: "Jan", tshirts: 400, jeans: 300, jackets: 500 },
+      { month: "Feb", tshirts: 300, jeans: 400, jackets: 550 },
+      { month: "Mar", tshirts: 500, jeans: 600, jackets: 700 },
+      { month: "Apr", tshirts: 600, jeans: 700, jackets: 650 },
+      { month: "May", tshirts: 700, jeans: 600, jackets: 750 },
+      { month: "Jun", tshirts: 650, jeans: 550, jackets: 800 },
+      { month: "Jul", tshirts: 800, jeans: 500, jackets: 850 }
+    ];
+
+    function renderChart(type, data) {
+      const ctx = document.getElementById("dashboardChart").getContext("2d");
+      if (chart) chart.destroy();
+
+      const datasets = [];
+      if (type === 'scatter') {
+        // Scatter plot needs x, y values for each data point
+        if (data.tshirts) {
+          datasets.push({
+            label: "T-Shirts",
+            data: data.tshirts.map(d => ({ x: d.month, y: d.value })),
+            backgroundColor: 'rgba(59, 130, 246, 0.6)', 
+            borderColor: 'rgba(59, 130, 246, 1)',
+            fill: false,
+          });
+        }
+        if (data.jeans) {
+          datasets.push({
+            label: "Jeans",
+            data: data.jeans.map(d => ({ x: d.month, y: d.value })),
+            backgroundColor: 'rgba(99, 102, 241, 0.6)',
+            borderColor: 'rgba(99, 102, 241, 1)',
+            fill: false,
+          });
+        }
+        if (data.jackets) {
+          datasets.push({
+            label: "Jackets",
+            data: data.jackets.map(d => ({ x: d.month, y: d.value })),
+            backgroundColor: 'rgba(37, 99, 235, 0.6)',
+            borderColor: 'rgba(37, 99, 235, 1)',
+            fill: false,
+          });
+        }
+      } else {
+        if (data.tshirts) {
+          datasets.push({
+            label: "T-Shirts",
+            data: data.tshirts.map(d => d.value),
+            backgroundColor: 'rgba(59, 130, 246, 0.6)', 
+            borderColor: 'rgba(59, 130, 246, 1)',
+            fill: false,
+          });
+        }
+        if (data.jeans) {
+          datasets.push({
+            label: "Jeans",
+            data: data.jeans.map(d => d.value),
+            backgroundColor: 'rgba(99, 102, 241, 0.6)',
+            borderColor: 'rgba(99, 102, 241, 1)',
+            fill: false,
+          });
+        }
+        if (data.jackets) {
+          datasets.push({
+            label: "Jackets",
+            data: data.jackets.map(d => d.value),
+            backgroundColor: 'rgba(37, 99, 235, 0.6)',
+            borderColor: 'rgba(37, 99, 235, 1)',
+            fill: false,
+          });
+        }
+      }
+
+      const config = {
+        type,
+        data: {
+          labels: data.months,
+          datasets: datasets,
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          onClick: (_, elements) => {
+            if (elements.length > 0) alert("Drill-down into: " + data.months[elements[0].index]);
+          },
+          scales: {
+            y: { beginAtZero: true },
+            x: { type: 'category' },
+          },
+        }
+      };
+
+      chart = new Chart(ctx, config);
+    }
+
+    function updateChart() {
+      const selectedType = document.getElementById("chartType").value;
+      const selectedFilter = document.getElementById("dataFilter").value;
+
+      let filteredData = {
+        months: clothingData.map(d => d.month),
+        tshirts: [],
+        jeans: [],
+        jackets: [],
+      };
+
+      if (selectedFilter === "all" || selectedFilter === "T-Shirts") {
+        filteredData.tshirts = clothingData.map(d => ({ month: d.month, value: d.tshirts }));
+      }
+      if (selectedFilter === "all" || selectedFilter === "Jeans") {
+        filteredData.jeans = clothingData.map(d => ({ month: d.month, value: d.jeans }));
+      }
+      if (selectedFilter === "all" || selectedFilter === "Jackets") {
+        filteredData.jackets = clothingData.map(d => ({ month: d.month, value: d.jackets }));
+      }
+
+      renderChart(selectedType, filteredData);
+    }
+
+    function toggleTheme() {
+      theme = theme === "dark" ? "light" : "dark";
+      document.body.classList.toggle("dark");
+    }
+
+    function exportData() {
+      const csv = ["month,tshirts,jeans,jackets"].concat(
+        clothingData.map(d => `${d.month},${d.tshirts},${d.jeans},${d.jackets}`)
+      ).join("\n");
+      const blob = new Blob([csv], { type: "text/csv" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "clothing-dashboard-data.csv";
+      a.click();
+    }
+
+    setInterval(() => {
+      clothingData.forEach(d => d.tshirts = Math.floor(Math.random() * 1000));
+      updateChart();
+    }, 30000);
+
+    document.getElementById("chartType").addEventListener("change", updateChart);
+    document.getElementById("dataFilter").addEventListener("change", updateChart);
+
+    updateChart();  // Initialize with default chart
+  </script>
+</body>
+</html>
